@@ -1,7 +1,7 @@
 use crate::ui::theme::Theme;
 use crate::ui::composites::setting_card;
 use gpui::{
-    div, px, App, Context, InteractiveElement, IntoElement, MouseButton, MouseDownEvent,
+    div, px, Anchor, App, Context, InteractiveElement, IntoElement, MouseButton, MouseDownEvent,
     ParentElement, Styled, Window,
 };
 use gpui_component::{h_flex, input::Input, popover::Popover, v_flex, ActiveTheme, Icon, Sizable};
@@ -65,7 +65,7 @@ impl SettingsWindow {
 
         Popover::new("shortcut-send-popover")
             .appearance(false)
-            .anchor(gpui::Corner::BottomLeft)
+            .anchor(Anchor::BottomLeft)
             .trigger(Self::general_select_trigger_button(
                 "shortcut-send-btn",
                 label,

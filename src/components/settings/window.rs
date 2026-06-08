@@ -650,7 +650,6 @@ impl SettingsWindow {
         let variant = ButtonCustomVariant::new(cx)
             .color(bg)
             .foreground(foreground)
-            .border(border)
             .hover(hover)
             .active(active);
 
@@ -658,6 +657,8 @@ impl SettingsWindow {
             .xsmall()
             .h(px(26.))
             .w(px(90.))
+            .border_1()
+            .border_color(border)
             .custom(variant)
             .child(
                 h_flex()
@@ -695,7 +696,7 @@ impl SettingsWindow {
 
         Popover::new("theme-popover")
             .appearance(false)
-            .anchor(gpui::Corner::BottomLeft)
+            .anchor(gpui::Anchor::BottomLeft)
             .trigger(Self::general_select_trigger_button("theme-btn", label, cx))
             .content(move |_, _window, cx| {
                 let theme = cx.theme();
@@ -856,7 +857,7 @@ impl SettingsWindow {
 
         Popover::new("language-popover")
             .appearance(false)
-            .anchor(gpui::Corner::BottomRight)
+            .anchor(gpui::Anchor::BottomRight)
             .trigger(Self::general_select_trigger_button(
                 "language-btn",
                 current_language.clone(),
@@ -989,7 +990,7 @@ impl SettingsWindow {
 
         Popover::new("translate-language-popover")
             .appearance(false)
-            .anchor(gpui::Corner::BottomRight)
+            .anchor(gpui::Anchor::BottomRight)
             .trigger(Self::general_select_trigger_button(
                 "translate-language-btn",
                 label,

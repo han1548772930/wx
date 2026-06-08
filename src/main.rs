@@ -7,10 +7,10 @@ mod ui;
 mod utils;
 
 use assets::Assets;
-use gpui::Application;
+use gpui_platform::application;
 
 fn main() {
-    let app = Application::new().with_assets(Assets);
+    let app = application().with_assets(Assets);
 
     app.run(move |cx| {
         crate::app::bootstrap::init_app(cx);

@@ -1,5 +1,4 @@
 use gpui::{Pixels, px};
-use gpui_component::PixelsExt;
 
 pub fn toolbar_width() -> Pixels {
     px(60.)

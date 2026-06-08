@@ -1,5 +1,5 @@
 use gpui::{
-    App, AppContext, Context, Corner, Entity, InteractiveElement, IntoElement, ParentElement,
+    Anchor, App, AppContext, Context, Entity, InteractiveElement, IntoElement, ParentElement,
     Render, StatefulInteractiveElement, Styled, Window, div,
 };
 use gpui_component::{
@@ -146,7 +146,7 @@ impl ToolBar {
         div().w_full().flex().items_center().justify_center().child(
             Popover::new("toolbar-phone")
                 .appearance(false)
-                .anchor(Corner::BottomRight)
+                .anchor(Anchor::BottomRight)
                 .trigger(
                     Button::new("phone-trigger")
                         .custom(button_style)
@@ -256,7 +256,7 @@ impl ToolBar {
             .child(
                 Popover::new("toolbar-menu")
                     .appearance(false)
-                    .anchor(Corner::BottomRight)
+                    .anchor(Anchor::BottomRight)
                     .trigger(
                         Button::new("menu-trigger")
                             .custom(button_style)

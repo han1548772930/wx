@@ -51,13 +51,14 @@ impl RenderOnce for SettingsButton {
         let settings_button_variant = ButtonCustomVariant::new(cx)
             .color(bg)
             .foreground(foreground)
-            .border(border_color)
             .hover(hover)
             .active(active);
 
         Button::new(self.id)
             .xsmall()
             .p_3()
+            .border_1()
+            .border_color(border_color)
             .custom(settings_button_variant)
             .when_some(self.label, |this, label| this.label(label))
             .when_some(self.on_click, |this, handler| {
