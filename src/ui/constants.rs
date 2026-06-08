@@ -31,7 +31,7 @@ pub fn icon_sm() -> Pixels {
     px(20.)
 }
 pub fn icon_md() -> Pixels {
-    px(20.)
+    px(24.)
 }
 
 pub fn session_list_min_width() -> Pixels {

@@ -1,1 +1,10 @@
-<?xml version="1.0" standalone="no"?><!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd"><svg t="1763367584694" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="119828" xmlns:xlink="http://www.w3.org/1999/xlink" width="256" height="256"><path d="M512 0L0 512h320v512h384V512h320L512 0z m128 448v512H384V448H154.496L512 90.496 869.504 448H640z" fill="" p-id="119829"></path></svg>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none">
+  <rect x="3" y="5" width="18" height="14" rx="2" stroke="#000" stroke-width="1.6"/>
+  <circle cx="7" cy="9" r="0.9" fill="#000"/>
+  <circle cx="10" cy="9" r="0.9" fill="#000"/>
+  <circle cx="13" cy="9" r="0.9" fill="#000"/>
+  <circle cx="16" cy="9" r="0.9" fill="#000"/>
+  <circle cx="7" cy="13" r="0.9" fill="#000"/>
+  <path d="M10 13h4" stroke="#000" stroke-width="1.6" stroke-linecap="round"/>
+  <circle cx="17" cy="13" r="0.9" fill="#000"/>
+</svg>

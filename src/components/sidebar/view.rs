@@ -99,8 +99,7 @@ impl RenderOnce for ToolbarPopoverTrigger {
             .child(
                 Icon::default()
                     .path(self.icon_path)
-                    .w(crate::ui::constants::icon_md())
-                    .h(crate::ui::constants::icon_md())
+                    .size(crate::ui::constants::icon_md())
                     .text_color(self.icon_color),
             )
     }
@@ -173,8 +172,7 @@ impl ToolBar {
                     .child(
                         Icon::default()
                             .path(icon_path)
-                            .w(crate::ui::constants::icon_md())
-                            .h(crate::ui::constants::icon_md())
+                            .size(crate::ui::constants::icon_md())
                             .text_color(icon_color),
                     ),
             )

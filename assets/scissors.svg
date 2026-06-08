@@ -1,1 +1,5 @@
-<?xml version="1.0" standalone="no"?><!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd"><svg t="1761033613746" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="61230" xmlns:xlink="http://www.w3.org/1999/xlink" width="256" height="256"><path d="M240.298667 57.429333a32 32 0 0 1 43.605333 12.245334L512 475.392l228.096-405.76a32 32 0 0 1 55.808 31.402667L548.693333 540.672l115.541334 205.44a160.042667 160.042667 0 1 1 5.802666 140.928L512 605.952 353.962667 887.04a160 160 0 1 1 5.802666-140.928l115.541334-205.44L228.096 101.034667a32 32 0 0 1 12.202667-43.605334z m57.173333 799.488a96 96 0 1 0-0.853333 1.493334l0.853333-1.493334z m429.866667 1.493334A96 96 0 0 0 906.666667 810.666667a96 96 0 1 0-180.181334 46.208l0.853334 1.536z" p-id="61231"></path></svg>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none">
+  <circle cx="6" cy="7" r="2.5" stroke="#000" stroke-width="1.6"/>
+  <circle cx="6" cy="17" r="2.5" stroke="#000" stroke-width="1.6"/>
+  <path d="M8.2 8.2 19 19M8.2 15.8 19 5" stroke="#000" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
