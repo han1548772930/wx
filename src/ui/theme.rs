@@ -7,6 +7,7 @@ pub use gpui_component::ThemeMode;
 pub struct WeixinThemeColors {
     pub toolbar_bg: Hsla,
     pub toolbar_button_hover: Hsla,
+    pub toolbar_button_active: Hsla,
     pub session_list_bg: Hsla,
     pub chat_area_bg: Hsla,
     pub search_bar_bg: Hsla,
@@ -33,10 +34,16 @@ pub struct WeixinThemeColors {
 }
 
 impl WeixinThemeColors {
+    fn alpha(color: u32, opacity: f32) -> Hsla {
+        let color: Hsla = rgb(color).into();
+        color.opacity(opacity)
+    }
+
     pub fn light() -> Self {
         Self {
             toolbar_bg: rgb(0xE6E6E6).into(),
-            toolbar_button_hover: rgb(0xDADADA).into(),
+            toolbar_button_hover: Self::alpha(0x000000, 0.06),
+            toolbar_button_active: Self::alpha(0x000000, 0.10),
             session_list_bg: rgb(0xF7F7F7).into(),
             chat_area_bg: rgb(0xEDEDED).into(),
             search_bar_bg: rgb(0xEDEDED).into(),
@@ -66,7 +73,8 @@ impl WeixinThemeColors {
     pub fn dark() -> Self {
         Self {
             toolbar_bg: rgb(0x2C2C2C).into(),
-            toolbar_button_hover: rgb(0x363636).into(),
+            toolbar_button_hover: Self::alpha(0xFFFFFF, 0.07),
+            toolbar_button_active: Self::alpha(0xFFFFFF, 0.11),
             session_list_bg: rgb(0x242424).into(),
             chat_area_bg: rgb(0x191919).into(),
             search_bar_bg: rgb(0x2F2F2F).into(),

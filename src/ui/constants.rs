@@ -31,7 +31,7 @@ pub fn icon_sm() -> Pixels {
     px(20.)
 }
 pub fn icon_md() -> Pixels {
-    px(21.)
+    px(20.)
 }
 
 pub fn session_list_min_width() -> Pixels {
@@ -42,7 +42,7 @@ pub fn session_list_max_width() -> Pixels {
 }
 
 pub fn toolbar_trigger_size() -> Pixels {
-    px(41.)
+    px(40.)
 }
 
 pub fn chat_input_default_height() -> Pixels {

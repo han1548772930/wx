@@ -4,10 +4,10 @@ use crate::components::sessions::DragSession;
 use crate::ui::fixed_resizable::fixed_h_resizable;
 use crate::ui::theme::Theme;
 use gpui::{
-    Context, InteractiveElement, IntoElement, ParentElement, Render, Styled, Window,
-    WindowControlArea, div, px,
+    Context, InteractiveElement, IntoElement, ObjectFit, ParentElement, Render, Styled,
+    StyledImage, Window, WindowControlArea, div, img, px,
 };
-use gpui_component::{ActiveTheme, Icon, avatar::Avatar, h_flex, v_flex};
+use gpui_component::{ActiveTheme, Icon, h_flex, v_flex};
 
 impl Render for WeixinApp {
     fn render(&mut self, window: &mut Window, cx: &mut Context<Self>) -> impl IntoElement {
@@ -68,11 +68,15 @@ impl WeixinApp {
             .items_center()
             .justify_center()
             .child(
-                Avatar::new()
-                    .w(crate::ui::constants::title_avatar_size())
-                    .h(crate::ui::constants::title_avatar_size())
+                div()
+                    .size(crate::ui::constants::title_avatar_size())
                     .rounded(crate::ui::constants::radius_md())
-                    .src(crate::ui::avatar::avatar_for_key("self")),
+                    .overflow_hidden()
+                    .child(
+                        img(crate::ui::avatar::avatar_for_key("self"))
+                            .size(crate::ui::constants::title_avatar_size())
+                            .object_fit(ObjectFit::Cover),
+                    ),
             )
     }
 

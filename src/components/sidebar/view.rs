@@ -1,11 +1,10 @@
 use gpui::{
     Anchor, App, AppContext, Context, Entity, InteractiveElement, IntoElement, ParentElement,
-    Render, StatefulInteractiveElement, Styled, Window, div,
+    Render, RenderOnce, SharedString, StatefulInteractiveElement, Styled, Window, div,
+    prelude::FluentBuilder,
 };
 use gpui_component::{
-    ActiveTheme, Icon, WindowExt,
-    button::{Button, ButtonCustomVariant, ButtonVariants},
-    popover::Popover,
+    ActiveTheme, Icon, Selectable, WindowExt, popover::Popover,
     v_flex,
 };
 
@@ -37,6 +36,74 @@ pub struct ToolBar {
     active_item: ToolbarItem,
     phone_hover: PhonePopoverHover,
     menu_hover: MenuPopoverHover,
+}
+
+#[derive(IntoElement)]
+struct ToolbarPopoverTrigger {
+    id: SharedString,
+    icon_path: SharedString,
+    icon_color: gpui::Hsla,
+    hover_bg: gpui::Hsla,
+    active_bg: gpui::Hsla,
+    selected: bool,
+}
+
+impl ToolbarPopoverTrigger {
+    fn new(
+        id: impl Into<SharedString>,
+        icon_path: impl Into<SharedString>,
+        icon_color: gpui::Hsla,
+        hover_bg: gpui::Hsla,
+        active_bg: gpui::Hsla,
+    ) -> Self {
+        Self {
+            id: id.into(),
+            icon_path: icon_path.into(),
+            icon_color,
+            hover_bg,
+            active_bg,
+            selected: false,
+        }
+    }
+}
+
+impl Selectable for ToolbarPopoverTrigger {
+    fn selected(mut self, selected: bool) -> Self {
+        self.selected = selected;
+        self
+    }
+
+    fn is_selected(&self) -> bool {
+        self.selected
+    }
+}
+
+impl RenderOnce for ToolbarPopoverTrigger {
+    fn render(self, _window: &mut Window, _cx: &mut App) -> impl IntoElement {
+        let selected = self.selected;
+        let hover_bg = self.hover_bg;
+        let active_bg = self.active_bg;
+
+        div()
+            .id(self.id)
+            .flex()
+            .items_center()
+            .justify_center()
+            .rounded(crate::ui::constants::radius_md())
+            .w(crate::ui::constants::toolbar_trigger_size())
+            .h(crate::ui::constants::toolbar_trigger_size())
+            .cursor_pointer()
+            .when(selected, |this| this.bg(active_bg))
+            .hover(move |this| this.bg(hover_bg))
+            .active(move |this| this.bg(active_bg))
+            .child(
+                Icon::default()
+                    .path(self.icon_path)
+                    .w(crate::ui::constants::icon_md())
+                    .h(crate::ui::constants::icon_md())
+                    .text_color(self.icon_color),
+            )
+    }
 }
 
 impl ToolBar {
@@ -78,6 +145,8 @@ impl ToolBar {
         } else {
             theme.muted_foreground
         };
+        let hover_bg = weixin_colors.toolbar_button_hover;
+        let active_bg = weixin_colors.toolbar_button_active;
 
         div()
             .w_full()
@@ -94,10 +163,8 @@ impl ToolBar {
                     .p(crate::ui::constants::toolbar_item_padding())
                     .rounded(crate::ui::constants::radius_md())
                     .cursor_pointer()
-                    .hover(move |this| {
-                        this.bg(weixin_colors.toolbar_button_hover)
-                            .border_color(gpui::transparent_black())
-                    })
+                    .hover(move |this| this.bg(hover_bg))
+                    .active(move |this| this.bg(active_bg))
                     .on_click(cx.listener(move |this, _, window, cx| {
                         this.active_item = item;
                         window.dispatch_action(Box::new(ToolbarClicked { item }), cx);
@@ -138,29 +205,20 @@ impl ToolBar {
         let theme = cx.theme();
         let weixin_colors = Theme::weixin_colors(cx);
         let toolbar = cx.entity();
-
-        let button_style = ButtonCustomVariant::new(cx)
-            .hover(weixin_colors.toolbar_button_hover)
-            .active(weixin_colors.toolbar_button_hover);
+        let hover_bg = weixin_colors.toolbar_button_hover;
+        let active_bg = weixin_colors.toolbar_button_active;
 
         div().w_full().flex().items_center().justify_center().child(
             Popover::new("toolbar-phone")
                 .appearance(false)
                 .anchor(Anchor::BottomRight)
-                .trigger(
-                    Button::new("phone-trigger")
-                        .custom(button_style)
-                        .rounded(crate::ui::constants::radius_md())
-                        .w(crate::ui::constants::toolbar_trigger_size())
-                        .h(crate::ui::constants::toolbar_trigger_size())
-                        .child(
-                            Icon::default()
-                                .path("phone.svg")
-                                .w(crate::ui::constants::icon_md())
-                                .h(crate::ui::constants::icon_md())
-                                .text_color(theme.muted_foreground),
-                        ),
-                )
+                .trigger(ToolbarPopoverTrigger::new(
+                    "phone-trigger",
+                    "phone.svg",
+                    theme.muted_foreground,
+                    hover_bg,
+                    active_bg,
+                ))
                 .content(move |_, _window, cx| {
                     let weixin_colors = Theme::weixin_colors(cx);
 
@@ -242,10 +300,8 @@ impl ToolBar {
         let theme = cx.theme();
         let weixin_colors = Theme::weixin_colors(cx);
         let toolbar = cx.entity();
-
-        let button_style = ButtonCustomVariant::new(cx)
-            .hover(weixin_colors.toolbar_button_hover)
-            .active(weixin_colors.toolbar_button_hover);
+        let hover_bg = weixin_colors.toolbar_button_hover;
+        let active_bg = weixin_colors.toolbar_button_active;
 
         div()
             .w_full()
@@ -257,20 +313,13 @@ impl ToolBar {
                 Popover::new("toolbar-menu")
                     .appearance(false)
                     .anchor(Anchor::BottomRight)
-                    .trigger(
-                        Button::new("menu-trigger")
-                            .custom(button_style)
-                            .rounded(crate::ui::constants::radius_md())
-                            .w(crate::ui::constants::toolbar_trigger_size())
-                            .h(crate::ui::constants::toolbar_trigger_size())
-                            .child(
-                                Icon::default()
-                                    .path("menu.svg")
-                                    .w(crate::ui::constants::icon_md())
-                                    .h(crate::ui::constants::icon_md())
-                                    .text_color(theme.muted_foreground),
-                            ),
-                    )
+                    .trigger(ToolbarPopoverTrigger::new(
+                        "menu-trigger",
+                        "menu.svg",
+                        theme.muted_foreground,
+                        hover_bg,
+                        active_bg,
+                    ))
                     .content(move |_, _window, cx| {
                         let weixin_colors = Theme::weixin_colors(cx);
 
